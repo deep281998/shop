@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -23,9 +24,13 @@ public class Customer {
 
     long mobno;
 
+    Date date;
+
     String address;
 
     @ManyToOne
     @JoinColumn
     Painter painter;
+
+
 }

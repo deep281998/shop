@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface Productrepository extends JpaRepository<Product , Integer> {
 
 
+    @Query(value = "select b from Product b where b.productname = :name")
+    Optional<Product> findbyname(String name);
 }

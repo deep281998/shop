@@ -40,4 +40,34 @@ public class Productservice {
     }
 
 
+    public ProductRespodtos updatequantity(String name, int quantity) {
+        Optional<Product> optionalProduct = productrepository.findbyname(name);
+        if(optionalProduct.isEmpty()){
+            throw new ProductNotFoundException("add product first");
+        }
+        Product product = optionalProduct.get();
+        product.setQuantity(product.getQuantity()+quantity);
+        productrepository.save(product);
+        return ProductRespodtos.builder()
+                .name(product.getProductname())
+                .quantity(product.getQuantity())
+                .build();
+    }
+
+    public ProductRespodtos deletequantity(String name, int quantity) {
+        Optional<Product> optionalProduct = productrepository.findbyname(name);
+        if(optionalProduct.isEmpty()){
+            throw new ProductNotFoundException("add product first");
+        }
+        if(optionalProduct.get().getQuantity() < quantity){
+            throw new ProductNotFoundException("less quantity in stock");
+        }
+        Product product = optionalProduct.get();
+        product.setQuantity(product.getQuantity()-quantity);
+        productrepository.save(product);
+        return ProductRespodtos.builder()
+                .name(product.getProductname())
+                .quantity(product.getQuantity())
+                .build();
+    }
 }

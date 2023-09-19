@@ -24,6 +24,28 @@ public class Productcontroller {
         }
     }
 
+    @PutMapping("/add-quantity")
+    public Object updatequantity(@RequestParam("id") String name , @RequestParam("q") int quantity){
+        try {
+            ProductRespodtos productRespodtos = productservice.updatequantity(name,quantity);
+            return productRespodtos;
+        }
+        catch (Exception e){
+            return e.getMessage();
+        }
+    }
+
+    @PutMapping("/delete-quantity")
+    public Object deletequantity(@RequestParam("id") String name , @RequestParam("q") int quantity){
+        try {
+            ProductRespodtos productRespodtos = productservice.deletequantity(name,quantity);
+            return productRespodtos;
+        }
+        catch (Exception e){
+            return e.getMessage();
+        }
+    }
+
 
 
 }
